@@ -21,7 +21,7 @@ Der Bot erkennt bestimmte Eingaben des Nutzers und reagiert mit zufälligen Antw
 ### Nutzung
 1. Starte das Programm mit:
    ```bash
-   python chatbot.py
+   python Decision.py
    ```
 2. Begrüße den Bot oder frage, wie es ihm geht.  
 3. Beende den Chat mit `exit`.  
@@ -66,7 +66,7 @@ The bot recognizes specific user inputs and replies with random responses from p
 ### Usage
 1. Run the program:
    ```bash
-   python chatbot.py
+   python Decision.py
    ```
 2. Greet the bot or ask how it is doing.  
 3. End the chat with `exit`.
