@@ -1,6 +1,13 @@
 import random
 import time
+import winsound
+import datetime
 
+
+user_datum_uhrzeit = [
+    "datum",
+    "uhrzeit"
+]
 
 user_begruessung = [
     "hi", "hallo", "moin", "moinsen", "servus", "guten tag", "tag"
@@ -27,13 +34,21 @@ user_ergehen_fragen = [
 user_bestaetigung = [
     "auch",
     "mir auch",
-    "mir auch danke"
+    "mir auch danke",
+    "auch danke",
     "gleichfalls",
     "mir geht es auch gut",
     "mir gehts auch gut",
     "super",
     "freut mich",
     "toll"
+]
+
+user_beenden = [
+    "exit",
+    "beenden",
+    "close",
+    "tschüss"
 ]
 
 bot_ergehen = [
@@ -68,13 +83,50 @@ def ladepunkte():
     time.sleep(0.5)
 
 
+#def melodie():                              #Platzhalter // Soon
+    #winsound.Beep(587, 400)
+    #winsound.Beep(784, 500)
+
+
 def willkommen():
-    print("+++DecisionV0.1+++")
+    winsound.Beep(784, 500)
+    print("+++DecisionV0.2+++")
     ladepunkte()
     print("\n+++Das hier wird mal ein kleiner Chatbot mit diversen eingebundenen kleinen Anwendungen+++")
     ladepunkte()
-    print("\n+++Zum jetzigen Zeitpunkt kannst du mich grüßen und fragen wie es mir geht.+++")
+    hauptmenue()
+    return
+
+
+def hauptmenue():
+    winsound.Beep(650, 500)
+    print("\n" * 100)
+    print("+++DecisionV0.2+++")
+    print("+++Hauptmenü+++")
     ladepunkte()
+    print("\n1. Hilfe")
+    print("2. Datum/Uhrzeit anzeigen")
+    return
+
+
+def hilfe():
+    ladepunkte()
+    print("\n+++Hilfe+++")
+    print("+++Hier findest du eine kleine Anleitung+++")
+    print("\n+++Du kannst den Bot einfach grüßen mit: Hi, Hallo, Moin, Moinsen, Servus, Guten Tag, Tag+++")
+    print("+++Um Gespräche führen zu können, kannst du einfach fragen: Wie gehts?, Wie gehts dir?, Was geht?, Alles klar? o.ä.+++")
+    print("+++Um Funktionen nutzen zu können, kannst du folgende Stichworte in die Konsole eintippen+++")
+    ladepunkte()
+    print("\nDatum oder Uhrzeit ------------> Zeigt dir immer das aktuelle Datum und die Uhrzeit gleichzeitig")
+    print("Hauptmenü ---------------------> So gelangst du von überall in das Hauptmenü zurück")
+    print("Exit, Close, Tschüss, Beenden -> Schließt die Anwendung sofort")
+    return
+
+
+
+def datum_uhrzeit():
+    antwort_datum_uhrzeit = datetime.datetime.now()
+    return antwort_datum_uhrzeit
 
 
 def begruessung():
@@ -98,7 +150,7 @@ def main():
     while True:
         user_input = input("\nDu: ").lower()
 
-        if user_input == "exit":
+        if any(wort == user_input for wort in user_beenden):
             print("\nBis zum nächsten mal!")
             ladepunkte()
             break
@@ -111,6 +163,19 @@ def main():
             fehler_zaehler = 0
         elif any(wort == user_input for wort in user_bestaetigung):
             print(bestaetigung())
+            fehler_zaehler = 0
+        elif any(wort in user_input for wort in user_datum_uhrzeit):
+            print("Gerne! Hier hast du das aktuelle Datum und die Uhrzeit:\n")
+            print(datum_uhrzeit())
+            fehler_zaehler = 0
+        elif user_input == "hilfe":
+            hilfe()
+            fehler_zaehler = 0
+        elif user_input == "1":
+            hilfe()
+            fehler_zaehler = 0
+        elif user_input == "hauptmenü":
+            hauptmenue()
             fehler_zaehler = 0
 
         else:
